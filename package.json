@@ -1,0 +1,27 @@
+{
+  "name": "koawithts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/koa-views": "^2.0.3",
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0",
+    "koa-views": "^6.1.4",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.5",
+    "pug": "^2.0.3",
+    "ts-node": "^6.0.5",
+    "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.45",
+    "@types/koa-router": "^7.0.28"
+  }
+}
