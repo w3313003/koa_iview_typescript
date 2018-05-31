@@ -7,9 +7,21 @@
 					欢迎登陆
 				</p>
 				<Form>
-					<i-input type="text">
-						<Icon slot="prepend" type="log-in" />
-					</i-input>
+					<FormItem>
+						<i-input placeholder="请输入用户名" type="text">
+							<Icon size="18" slot="prepend" type="person" />
+						</i-input>
+					</FormItem>
+					<FormItem>
+						<i-input placeholder="请输入密码" type="password">
+							<Icon size="18" slot="prepend" type="locked" />
+						</i-input>
+					</FormItem>
+					<FormItem>
+						<Button type="primary" long @click="login">
+							登陆
+						</Button>
+					</FormItem>
 				</Form>
 			</Card>
 		</div>
@@ -36,11 +48,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import api from "../api/resource";
+console.log(api);
 export default Vue.extend({
 	data() {
 		return {
 			name: 123
 		};
+	},
+	methods: {
+		login(): void {
+		}
 	}
 });
 </script>
