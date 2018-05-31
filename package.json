@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/mysql": "^2.15.4",
     "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.8.1",
+    "koa-static": "^4.0.3",
     "koa-views": "^6.1.4",
     "mysql": "^2.15.0",
     "nodemon": "^1.17.5",
@@ -21,8 +23,9 @@
     "typescript": "^2.8.3"
   },
   "devDependencies": {
-    "@types/koa-views": "^2.0.3",
     "@types/koa": "^2.0.45",
-    "@types/koa-router": "^7.0.28"
+    "@types/koa-router": "^7.0.28",
+    "@types/koa-views": "^2.0.3",
+    "@types/mysql": "^2.15.4"
   }
 }

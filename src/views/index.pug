@@ -6,3 +6,12 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Document
     body
+        div hello index
+        table
+            tr
+                each row in ["id", "username", "phone", "count", "type"]
+                    th= row
+            each row in data
+                tr
+                    each val in row
+                        td= val
