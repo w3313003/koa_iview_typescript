@@ -2,7 +2,9 @@ import * as Koa from "koa";
 import * as views from "koa-views";
 import routers from "./route/index";
 import _sql  from "./util/db_util";
+const cors = require("koa2-cors");
 const _static = require("koa-static");
+const bodyParser = require("koa-bodyparser");
 const Path = require("path");
 const app = new Koa();
 
@@ -18,6 +20,22 @@ const app = new Koa();
 app.use(views(Path.join(__dirname + "/views"), {
     extension: "pug"
 }));
+
+// 解析post
+app.use(bodyParser());
+
+// 跨域cors
+app.use(cors({
+    origin: function (ctx: any) {
+        return "*"
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE', 'PUT'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+}));  
+
 
 // 静态资源托管
 app.use(_static(Path.join(__dirname + "/resource")));

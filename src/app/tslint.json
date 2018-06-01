@@ -9,7 +9,7 @@
     ]
   },
   "rules": {
-    "quotemark": [true, "single"],
+    "quotemark": false,
     "indent": [true, "tabs", 4],
     "interface-name": false,
     "ordered-imports": false,
@@ -19,6 +19,10 @@
     "trailing-comma": false,
     "no-var-keyword": true,
     "no-var-requires": false,
-    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
+    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }],
+    "arrow-parens": false,
+    "no-namespace": false,
+    "class-name": false,
+    "no-reference": false
   }
 }

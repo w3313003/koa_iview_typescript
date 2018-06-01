@@ -4,6 +4,6 @@ export const config = {
         port: 3306,
         user: "root",
         password: "123456",
-        database: "db1"
+        database: "db2"
 	}
 };

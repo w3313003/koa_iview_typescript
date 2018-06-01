@@ -1,17 +1,6 @@
 import { config } from '../config/config';
 import * as mysql from "mysql";
-
-interface sqls {
-	query: Function,
-	createTable: Function,
-	findDataById: Function,
-	findDataByPage: Function,
-	deleteDataById: Function,
-	insertData: Function,
-	updateData: Function,
-	select: Function,
-	count: Function
-}
+import { arrayExpression } from 'babel-types';
 
 const {host, port, user, password, database} = config.database;
 
@@ -22,8 +11,9 @@ const pool = mysql.createPool({
     password, 
     database
 });
+let a: number | string;
 
-let query = function (sql: string | object, values: object): Promise<object> {
+let query = function (sql: string, values?: object): Promise<object>{
     return new Promise<object>((resolve, reject) => {
         pool.getConnection((err: any, conn: any) => {
             if (err) {
@@ -36,6 +26,7 @@ let query = function (sql: string | object, values: object): Promise<object> {
                     return;
                 }
                 resolve(result);
+                
                 conn.release();
             })
         })

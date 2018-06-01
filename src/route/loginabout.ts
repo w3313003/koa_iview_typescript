@@ -1,6 +1,7 @@
 const router = require("koa-router")();
 import controller from ".././controller/login";
 
-router.get("/", controller.post);
+router.post("/", controller.post);
+
 
 export default router;
