@@ -1,6 +1,6 @@
 <template>
     <div>
-    
+        123214132
     </div>
 </template>
 
@@ -14,7 +14,7 @@ export default Vue.extend({
 
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 
 
 </style>

@@ -55,30 +55,35 @@ export default Vue.extend({
 	},
 	methods: {
 		login(): void {
-			this.$refs.form.validate((valid: boolean) => {
+			(<any>this).$refs.form.validate((valid: boolean) => {
 				if(valid) {
 					api.post("/login", {
 						username: this.formData.username,
 						password: md5(this.formData.password)
 					}).then(res => {
 						if(res.data.code === 0) {
-							this.$Notice.success({
+							(<any>this).$Notice.success({
 								title: "登陆成功",
 								desc: "即将跳转到首页"
 							});
-							this.loginSuccess(true);
+							(<any>this).loginSuccess(true);
+							(<any>this).setUserInfo(res.data.data);
+							setTimeout(() => {
+								this.$router.push("/")
+							}, 500);
 						}
 					});
 					return;
 				};
-				this.$Notice.warning({
+				(<any>this).$Notice.warning({
 					title: "登陆失败",
 					desc: "请完善登陆信息后重试"
 				});
 			})
 		},
 		...mapMutations({
-			loginSuccess: Types.LOGIN
+			loginSuccess: Types.LOGIN,
+			setUserInfo: Types.SET_USERINFO
 		})
 	}
 });

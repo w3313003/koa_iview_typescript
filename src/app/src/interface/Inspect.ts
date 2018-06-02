@@ -10,5 +10,10 @@ export namespace Inspect {
 	}
 	export interface State {
 		isLogin: boolean;
+		userInfo: {
+			[property: string]: any
+		};
+		openmenus: Array<number | string>;
+		cachePages: Array<object>
 	}
 }

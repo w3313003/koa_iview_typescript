@@ -1,6 +1,7 @@
-export interface State {
-	isLogin: boolean;
-}
+import {parseStoage} from "../common/util";
 export default {
-	isLogin: false
+	isLogin: parseStoage("isLogin") || false,
+	userInfo: parseStoage("userInfo") || {},
+	openmenus: parseStoage("openmenus") || [],
+	cachePages: parseStoage("cachePages") || []
 };

@@ -1,7 +1,6 @@
-import * as Koa from "koa";
 import query from "../util/db_util";
 import { formatRes } from "../util/response";
-
+import menu from "../util/mockmenu";
 export default {
 	async post(ctx: any) {
 		const { password, username } = ctx.request.body;
@@ -13,7 +12,7 @@ export default {
 			const result = (<any[]>data)[0],
 				  { password: realPwd } = result;
 			if(password === realPwd) {
-				ctx.body = formatRes(0, {data: result}, "登陆成功");
+				ctx.body = formatRes(0, Object.assign({}, result, {menu}), "登陆成功");
 			} else {
 				ctx.body = formatRes(-1, null, "密码错误");
 			}

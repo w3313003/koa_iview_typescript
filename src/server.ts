@@ -24,7 +24,7 @@ app.use(views(Path.join(__dirname + "/views"), {
 // 解析post
 app.use(bodyParser());
 
-// 跨域cors
+// CORS跨域
 app.use(cors({
     origin: function (ctx: any) {
         return "*"

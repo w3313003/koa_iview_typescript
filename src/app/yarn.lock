@@ -653,6 +653,10 @@
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
+"@types/iscroll@^5.2.2":
+  version "5.2.2"
+  resolved "http://registry.npm.taobao.org/@types/iscroll/download/@types/iscroll-5.2.2.tgz#74bd6191b0a0c44c22b65386fcf7a0b1d72696da"
+
 "@types/md5@^2.1.32":
   version "2.1.32"
   resolved "http://registry.npm.taobao.org/@types/md5/download/@types/md5-2.1.32.tgz#93e23437fcd17a7b9ca98d02aa6002e835842fe8"
@@ -3538,6 +3542,10 @@ isarray@0.0.1:
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/isarray/download/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+
+iscroll@^5.2.0:
+  version "5.2.0"
+  resolved "http://registry.npm.taobao.org/iscroll/download/iscroll-5.2.0.tgz#d513307088b5b25a4f893af474804468481829c8"
 
 isemail@3.x.x:
   version "3.1.2"
