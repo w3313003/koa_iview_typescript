@@ -34,7 +34,7 @@ import Vue from 'vue';
 import api from "../api/resource";
 import md5 from "md5";
 import { validateUname, validatePassword } from "../common/util";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 import * as Types from "../store/mutations/types";
 export default Vue.extend({
 	data() {
@@ -66,8 +66,7 @@ export default Vue.extend({
 								title: "登陆成功",
 								desc: "即将跳转到首页"
 							});
-							(<any>this).loginSuccess(true);
-							(<any>this).setUserInfo(res.data.data);
+							this.userLogin(res.data.data);
 							setTimeout(() => {
 								this.$router.push("/")
 							}, 500);
@@ -81,10 +80,9 @@ export default Vue.extend({
 				});
 			})
 		},
-		...mapMutations({
-			loginSuccess: Types.LOGIN,
-			setUserInfo: Types.SET_USERINFO
-		})
+		...mapActions([
+			"userLogin"
+		])
 	}
 });
 </script>

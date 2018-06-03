@@ -57,7 +57,7 @@ export default Vue.extend({
 	    }
     },
     methods: {
-		getNameList(nameList) {
+		getNameList(nameList: Array<number>) {
 			this.setOpenMenus(nameList);
 			this.initScroll();
 		},

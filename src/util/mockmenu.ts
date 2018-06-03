@@ -44,18 +44,18 @@ export default  [
 	{
 		icon: "android-playstore",
 		type: "dropdown",
-		title: "店铺管理",
+		title: "店铺设置",
 		path: "/store",
 		parent_id: 0,
-		id: 25,
+		id: 24112,
 		sort: 1,
 		child: [ {
 			icon: "information-circled",
 			type: "menu",
 			title: "店铺信息",
 			path: "/store/info",
-			parent_id: 25,
-			id:251,
+			parent_id: 24112,
+			id:241121,
 			sort: 1,
 			child: []
 		}, {
@@ -63,8 +63,8 @@ export default  [
 			type: "menu",
 			title: "店铺管理",
 			path: "/store/settings",
-			parent_id: 25,
-			id:251,
+			parent_id: 24112,
+			id:241122,
 			sort: 1,
 			child: []
 		}]
@@ -144,7 +144,7 @@ export default  [
 	{
 		icon: "icon-setting",
 		sort: 1,
-		type: "",
+		type: "dropdown",
 		title: "系统配置",
 		path: "/setting",
 		parent_id: 0,
@@ -162,7 +162,7 @@ export default  [
 					{
 						icon: null,
 						sort: 0,
-						type: "menu",
+						type: "dropdown",
 						title: "操作列表",
 						path: "/setting/action",
 						parent_id: 11,

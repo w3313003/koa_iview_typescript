@@ -17,11 +17,17 @@ const router = new Router({
 					path: "/setAuth",
 					component: () => import('./views/pages/setAuth.vue'),
 				},
-			//	店铺信息
+			//	店铺相关
 				{
 					path: "/store/settings",
 					component: () => import("./views/pages/store/settings.vue")
-				},
+				}, {
+					path: "/store/info",
+					component: () => import("./views/pages/store/info.vue")
+				}, {
+					path: "/setting/action/test",
+					component: () => import("./views/pages/store/settings.vue")
+				}
 			]
 		},
 		{

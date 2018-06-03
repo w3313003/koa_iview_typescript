@@ -6,5 +6,12 @@ export default {
 	},
 	getOpenMenus(state: Inspect.State) {
 		return state.openmenus;
+	},
+	getCurrentPage(state: Inspect.State) {
+		let path = location.hash.replace(/#/, "");
+		return state.cachePages.find((v: any) => v.path === path);
+	},
+	sortBread(state: Inspect.State) {
+		return state.breadcrumbList.reverse();
 	}
 }

@@ -8,6 +8,19 @@
             </div>
 	        <div class="middle-con">
 		        <div class="main-breadcrumb">
+					<Breadcrumb>
+						<BreadcrumbItem to="/">
+							首页
+						</BreadcrumbItem>
+						<BreadcrumbItem
+							v-for="(item) of sortBread"
+							:key="item.id"
+							:to="item.type === 'menu' ? item.path : null"
+						>
+							<Icon :type="item.icon"/>
+							{{item.title}}
+						</BreadcrumbItem>
+					</Breadcrumb>
 			        <!--<breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>-->
 		        </div>
 	        </div>
@@ -17,9 +30,27 @@
 
 <script lang="ts">
 import Vue from "vue";
-
+import { mapGetters, mapMutations } from "vuex";
+import * as Types from "../store/mutations/types";
+import { collectAncestor } from "../common/util";
 export default Vue.extend({
-
+	computed: {
+		...mapGetters({
+			currentPage: "getCurrentPage",
+			menus: "getMenus",
+			sortBread: "sortBread"
+		})
+	},
+	methods: {
+		...mapMutations({
+			"putBreadList": Types.SET_BREADCRUMB_LIST
+		})
+	},
+	created() {
+		this.putBreadList(collectAncestor(this.menus, !this.currentPage ? 0 : this.currentPage.id));
+	},
+	watch: {
+	}
 
 });
 
@@ -45,7 +76,7 @@ export default Vue.extend({
 		.navicon-con
 			margin: 6px;
 			display: inline-block;
-		.midder-con
+		.middle-con
 			position: absolute;
 			left: 60px;
 			top: 0;

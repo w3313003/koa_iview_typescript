@@ -21,6 +21,11 @@ export default {
 		if(idList.some(v => v === newId)) return;
 		state.cachePages.push(payload);
 		vueX2stoage("cachePages", state.cachePages);
+	},
+	
+	[Types.SET_BREADCRUMB_LIST](state:Inspect.State, payload: any) {
+		vueX2stoage("breadcrumbList", payload);
+		state.breadcrumbList = payload;
 	}
 	
 };
