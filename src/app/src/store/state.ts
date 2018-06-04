@@ -4,5 +4,6 @@ export default {
 	userInfo: parseStoage("userInfo") || {},
 	openmenus: parseStoage("openmenus") || [],
 	cachePages: parseStoage("cachePages") || [],
-	breadcrumbList: parseStoage("breadcrumbList") || []
+	breadcrumbList: parseStoage("breadcrumbList") || [],
+	currentPage: parseStoage("currentPage") || {}
 };

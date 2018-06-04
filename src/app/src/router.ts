@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import Router , { Route } from 'vue-router';
 import Login from './views/login.vue';
-import Main from './views/main.vue';
 import Store from "./store/index";
 const iView = require("iview");
-
 Vue.use(Router);
 
 const router = new Router({

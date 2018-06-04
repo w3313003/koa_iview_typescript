@@ -15,6 +15,7 @@ export namespace Inspect {
 		};
 		openmenus: Array<number | string>;
 		cachePages: Array<object>,
-		breadcrumbList: Array<object>
+		breadcrumbList: Array<object>,
+		currentPage: object | undefined
 	}
 }

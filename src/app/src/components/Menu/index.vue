@@ -9,6 +9,7 @@
                   theme="dark"
                   :open-names="openMenus"
                   :active-name="activePath"
+                  :accordion="true"
             >
 	            <Submenu v-for="(item, index) of menus" :key="index" :name="item.id">
 		            <template slot="title">

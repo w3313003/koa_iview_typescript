@@ -26,6 +26,12 @@ export default {
 	[Types.SET_BREADCRUMB_LIST](state:Inspect.State, payload: any) {
 		vueX2stoage("breadcrumbList", payload);
 		state.breadcrumbList = payload;
+	},
+	[Types.SET_CURRENT_PAGE](state: Inspect.State, payload: any) {
+		const path = location.hash.replace(/#/, ""),
+			currentPage = state.cachePages.find((v: any) => v.path === path);
+		vueX2stoage("currentPage", currentPage || {});
+		state.currentPage = currentPage || {};
 	}
 	
 };
