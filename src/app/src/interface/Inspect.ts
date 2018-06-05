@@ -8,6 +8,14 @@ export namespace Inspect {
 		delete: (url: string, params?: object, config?: object) => AxiosPromise;
 		put: (url: string, params?: object, config?: object) => AxiosPromise;
 	}
+	export interface classPage {
+		path: string;
+		title: string;
+		parent_id: number;
+		id: number;
+		child: classPage[];
+		[property: string]: any;
+	}
 	export interface State {
 		isLogin: boolean;
 		userInfo: {
@@ -18,6 +26,5 @@ export namespace Inspect {
 		breadcrumbList: object[];
 		currentPage: object | undefined;
 		shrink: boolean;
-
 	}
 }

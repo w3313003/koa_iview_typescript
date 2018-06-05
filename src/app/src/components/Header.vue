@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="headWrapper">
         <div class="header">
             <div class="navicon-con" >
 	           <Button type="text" :loading="false" @click="toggleClick">
@@ -15,6 +15,7 @@
 						<BreadcrumbItem
 							v-for="(item) of sortBread"
 							:key="item.id"
+							v-if="item.title !== '首页'"
 							:to="item.type === 'menu' ? item.path : null"
 						>
 							<Icon :type="item.icon"/>
@@ -25,8 +26,21 @@
 	        </div>
         </div>
         <div class="tags-con">
-	        <div class="tags-outer-scroll-con">
-		      
+	        <div class="tags-outer-scroll-con" ref="scrollX">
+		        <div class="tag-wrapper">
+			        <div>
+				        <Tag :key="index"
+				             v-for="(item, index) of cachePages"
+				             type="dot"
+				             :closable="item.title !== '首页'"
+				             :color="item.id === currentPage.id ? 'blue' : ''"
+				             @click.native="linkTo(item)"
+				        >
+					        {{item.title}}
+				        </Tag>
+			        </div>
+			        
+		        </div>
 	        </div>
 	        <div class="close-all-tag-con">
 		        <Dropdown transfer  slot="list">
@@ -47,21 +61,89 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import * as Types from "../store/mutations/types";
-import { collectAncestor } from "../common/util";
+const IScroll = require("iscroll");
 export default Vue.extend({
+	data() {
+		return {
+			caches: [{
+				title: "测试出差是",
+				id: 20
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},{
+				title: "测试出差是"
+			},]
+		}
+	},
 	computed: {
 		...mapGetters({
 			currentPage: "getCurrentPage",
 			menus: "getMenus",
 			sortBread: "sortBread"
+		}),
+		...mapState(["cachePages", "currentPage"])
+	},
+	watch: {
+		cachePages: {
+			handler() {
+				setTimeout(() => {
+					this.initScroll()
+				}, 17);
+			},
+			deep: true
+		}
+	},
+	mounted() {
+		this.$nextTick(() => {
+			this.initScroll();
 		})
 	},
 	methods: {
+		initScroll() {
+			if(!this.scroll) {
+				this.scroll = new IScroll(this.$refs.scrollX, {
+					scrollX: true,
+					scrollY: false,
+					mouseWheel: true
+				})
+			} else {
+				this.scroll.refresh();
+			}
+		},
 		toggleClick() {
 			this.set_shrink();
 			return false;
+		},
+		linkTo(item) {
+			this.$router.push(item.path);
 		},
 		...mapMutations({
 			set_shrink: Types.SET_SHRINK
@@ -72,7 +154,7 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.wrap
+.headWrapper
 	box-sizing border-box
 	position fixed;
 	display block;
@@ -110,9 +192,16 @@ export default Vue.extend({
 			position: absolute;
 			left 0
 			box-sizing: border-box;
-			width: calc(100% - 120px);
+			width: calc(100% - 110px);
+			padding: 0 10px
 			height: 100%;
 			overflow: hidden;
+			white-space: nowrap
+			.tag-wrapper
+				display: block;
+				position: absolute
+				overflow visible
+				z-index: 999
 		.close-all-tag-con
 			position absolute
 			right 0

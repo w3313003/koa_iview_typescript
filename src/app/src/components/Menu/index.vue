@@ -10,6 +10,7 @@
                   :open-names="openMenus"
                   :active-name="activePath"
                   :accordion="true"
+				  ref="menu"
             >
 	            <Submenu v-for="(item, index) of menus" :key="index" :name="item.id">
 		            <template slot="title">
@@ -25,8 +26,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-var Scroll = require("iscroll");
-import { mapGetters, mapMutations } from "vuex";
+const Scroll = require("iscroll");
+import { mapGetters, mapMutations, mapState } from "vuex";
 import * as Types from "../../store/mutations/types";
 import recursionSub from "./Submenu.vue";
 import { searchMenuByPath } from "../../common/util";
@@ -39,15 +40,31 @@ export default Vue.extend({
         this.$nextTick(() => {
         	this.initScroll();
         });
-    },
+	},
+	mounted() {
+		// this.$nextTick(() => {
+		// 	this.$refs.menu.updateOpened();
+		// })
+	},
 	data() {
 		return {
+		}
+	},
+	watch: {
+		openMenus: {
+			handler(newList) {
+				setTimeout(() => {
+					this.$refs.menu.updateOpened();
+				}, 17)
+			},
+			deep: true
 		}
 	},
     computed: {
 		...mapGetters({
 			menus: "getMenus",
-			openMenus: "getOpenMenus"
+			openMenus: "getOpenMenus",
+			lastOpenMenus: "lastingOpenMenus"
 		}),
     	needScroll() {
             const ulHeight = this.$refs.wrap.querySelector("ul").clientHeight;
@@ -63,7 +80,7 @@ export default Vue.extend({
 			this.initScroll();
 		},
 		handlerSelect(path: string) {
-			this.putToCache(searchMenuByPath(this.menus, path));
+			// this.putToCache(searchMenuByPath(this.menus, path));
 			this.$router.push(`${path}`)
 		},
     	initScroll() {

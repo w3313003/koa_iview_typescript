@@ -1,3 +1,5 @@
+import { Inspect } from "../interface/Inspect";
+
 export function validateUname(rule: object, value: string, callback: (...args: any[]) => any) {
 	if (/[^\w]/.test(value)) {
 		callback(new Error('用户名不得含有特殊字符'));
@@ -51,7 +53,8 @@ export function searchMenuByPath(menuData: Array<object>, path: string): void | 
 	return result;
 }
 
-export function collectAncestor (menuData: Array<object>, id: number): void | object {
+export function collectAncestor(menuData: Array<object>, page: Inspect.classPage): Inspect.classPage[] | any{
+	const id = page.id;
 	if(!menuData || menuData.length < 1) return;
 	let result: any = [];
 	function search(menus: Array<any>, id: number) {

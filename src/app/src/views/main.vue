@@ -19,7 +19,7 @@ export default Vue.extend({
 		Main
 	},
 	created() {
-		this.$router.replace('/main')
+		// this.$router.push('/main');
 	}
 })
 </script>

@@ -1,5 +1,5 @@
 import * as Types from "./types";
-import { vueX2stoage } from "../../common/util";
+import { vueX2stoage, searchMenuByPath } from "../../common/util";
 import { Inspect } from "../../interface/Inspect";
 import State = Inspect.State;
 export default {
@@ -28,7 +28,8 @@ export default {
 	},
 	[Types.SET_CURRENT_PAGE](state: Inspect.State, payload: any) {
 		const path = location.hash.replace(/#/, ""),
-			currentPage = state.cachePages.find((v: any) => v.path === path);
+			currentPage = searchMenuByPath(state.userInfo.menu, path);
+		console.log(path);
 		vueX2stoage("currentPage", currentPage || {});
 		state.currentPage = currentPage || {};
 	},

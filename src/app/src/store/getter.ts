@@ -13,5 +13,8 @@ export default {
 	},
 	sortBread(state: Inspect.State) {
 		return state.breadcrumbList.reverse();
+	},
+	lastingOpenMenus(state: Inspect.State) {
+		return state.breadcrumbList.reverse().map((v: any) => v.id);
 	}
 }
