@@ -22,8 +22,8 @@ export default  [
 				icon: "lock-combination",
 				sort: 2,
 				type: "dropdown",
-				title: "修改密码",
-				path: "/main/login",
+				title: "用户信息",
+				path: "/main/userInfo",
 				parent_id: 19,
 				id: 21,
 				child: [
@@ -32,7 +32,7 @@ export default  [
 						sort: 3,
 						type: "menu",
 						title: "登录密码",
-						path: "/main/login",
+						path: "/main/userInfo/password",
 						parent_id: 21,
 						id: 22,
 						child: []

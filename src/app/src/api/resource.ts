@@ -5,7 +5,7 @@
  *@Time: 22:05
 */
 import axios, { AxiosPromise } from "axios";
-
+import Router from "../router";
 const { Notice } = require('iview');
 
 const BASE_URL = "http://localhost:3000";

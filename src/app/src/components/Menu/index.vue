@@ -25,10 +25,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Scroll from "iscroll";
+var Scroll = require("iscroll");
 import { mapGetters, mapMutations } from "vuex";
 import * as Types from "../../store/mutations/types";
-import recursionSub from "./Submenu";
+import recursionSub from "./Submenu.vue";
 import { searchMenuByPath } from "../../common/util";
 
 export default Vue.extend({

@@ -5,5 +5,6 @@ export default {
 	openmenus: parseStoage("openmenus") || [],
 	cachePages: parseStoage("cachePages") || [],
 	breadcrumbList: parseStoage("breadcrumbList") || [],
-	currentPage: parseStoage("currentPage") || {}
+	currentPage: parseStoage("currentPage") || {},
+	shrink: parseStoage("skrink") || false
 };

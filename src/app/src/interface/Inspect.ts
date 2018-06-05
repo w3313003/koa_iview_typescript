@@ -14,8 +14,10 @@ export namespace Inspect {
 			[property: string]: any
 		};
 		openmenus: Array<number | string>;
-		cachePages: Array<object>,
-		breadcrumbList: Array<object>,
-		currentPage: object | undefined
+		cachePages: object[];
+		breadcrumbList: object[];
+		currentPage: object | undefined;
+		shrink: boolean;
+
 	}
 }

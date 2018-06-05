@@ -18,11 +18,10 @@ export default {
 	[Types.PUT_TOCACHE](state: Inspect.State, payload: any) {
 		let idList = state.cachePages.map((v: any) => v.id),
 			newId = payload.id;
-		if(idList.some(v => v === newId)) return;
+		if (idList.some(v => v === newId)) return;
 		state.cachePages.push(payload);
 		vueX2stoage("cachePages", state.cachePages);
 	},
-	
 	[Types.SET_BREADCRUMB_LIST](state:Inspect.State, payload: any) {
 		vueX2stoage("breadcrumbList", payload);
 		state.breadcrumbList = payload;
@@ -32,6 +31,9 @@ export default {
 			currentPage = state.cachePages.find((v: any) => v.path === path);
 		vueX2stoage("currentPage", currentPage || {});
 		state.currentPage = currentPage || {};
+	},
+	[Types.SET_SHRINK](State: Inspect.State) {
+		State.shrink = !State.shrink;
+		vueX2stoage("shrink", State.shrink);
 	}
-	
 };

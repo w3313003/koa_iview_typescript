@@ -2,7 +2,7 @@
     <div class="wrap">
         <div class="header">
             <div class="navicon-con" >
-	           <Button type="text">
+	           <Button type="text" :loading="false" @click="toggleClick">
 		           <Icon type="navicon" size="32" />
 	           </Button>
             </div>
@@ -59,12 +59,13 @@ export default Vue.extend({
 		})
 	},
 	methods: {
+		toggleClick() {
+			this.set_shrink();
+			return false;
+		},
 		...mapMutations({
-			"putBreadList": Types.SET_BREADCRUMB_LIST
+			set_shrink: Types.SET_SHRINK
 		})
-	},
-	created() {
-		this.putBreadList(collectAncestor(this.menus, !this.currentPage ? 0 : this.currentPage.id));
 	}
 });
 

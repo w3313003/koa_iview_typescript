@@ -15,10 +15,18 @@ const router = new Router({
 					path: "/setAuth",
 					component: () => import('./views/pages/setAuth.vue'),
 				},
-			//	店铺相关
+				// 首页信息
+				{
+					path: "/main",
+					component: () => import('./views/pages/main/platformInfo.vue')
+				},
+				// 店铺相关
 				{
 					path: "/store/settings",
-					component: () => import("./views/pages/store/settings.vue")
+					component: () => import("./views/pages/store/settings.vue"),
+					props: {
+						age: 12312312
+					}
 				}, {
 					path: "/store/info",
 					component: () => import("./views/pages/store/info.vue")
@@ -33,13 +41,21 @@ const router = new Router({
 			component: Login,
 			beforeEnter(to, from, next) {
 				console.log(Store.state.isLogin);
-				if(Store.state.isLogin) {
+				if (Store.state.isLogin) {
 					next("/");
 				} else {
 					next();
 				}
 			},
 			meta: {title: "登陆"}
+		},
+		{
+			path: "/404",
+			component: () => import("./views/pages/error/404.vue")
+		},
+		{
+			path: "*",
+			redirect: '/404',
 		}
 	],
 });

@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Scroll from "iscroll"
+var Scroll = require("iscroll");
 export default Vue.extend({
 	created() {
 		this.$nextTick(() => {
@@ -18,6 +18,16 @@ export default Vue.extend({
 				this.initScroll();
 			})
 		})
+	},
+	watch: {
+		$route: {
+			handler() {
+				setTimeout(() => {
+					this.initScroll();
+				}, 17)
+			},
+			deep: true
+		}
 	},
 	methods: {
 		initScroll() {
