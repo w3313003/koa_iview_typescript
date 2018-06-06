@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b79b34e8-ccea-4dba-88ef-9782491d16ab" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/common/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/common/util.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/components/Menu/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/components/Menu/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/interface/Inspect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/interface/Inspect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/store/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/store/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/store/getter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/store/getter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/store/mutations/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/store/mutations/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/views/main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/views/main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/src/views/pages/main/platformInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/src/views/pages/main/platformInfo.vue" afterDir="false" />
-    </list>
+    <list default="true" id="b79b34e8-ccea-4dba-88ef-9782491d16ab" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -392,7 +379,7 @@
       <workItem from="1527990413461" duration="10622000" />
       <workItem from="1528021653535" duration="3838000" />
       <workItem from="1528121606130" duration="5682000" />
-      <workItem from="1528201670391" duration="10886000" />
+      <workItem from="1528201670391" duration="10987000" />
     </task>
     <task id="LOCAL-00001" summary="async封装sql查询">
       <created>1527700150201</created>
@@ -422,14 +409,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528127153646</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="6.6 各组件联动优化">
+      <created>1528218033191</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1528218033191</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84751000" />
+    <option name="totallyTimeSpent" value="84852000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="8" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1640625" />
@@ -463,7 +457,8 @@
     <MESSAGE value="6.3" />
     <MESSAGE value="6.4 后台管理框架搭建完成" />
     <MESSAGE value="6.4 面包屑导航实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.4 面包屑导航实现" />
+    <MESSAGE value="6.6 各组件联动优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.6 各组件联动优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

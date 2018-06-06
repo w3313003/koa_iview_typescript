@@ -12,7 +12,7 @@ export default {
 		Promise.resolve(state.currentPage).then((page: Inspect.classPage) => {
 			commit(Types.PUT_TOCACHE, page);
 			return page;
-		}).then((page: Inspect.classPage) => {
+		}).then(page => {
 			const breadList: Inspect.classPage[] = collectAncestor(state.userInfo.menu, page);
 			commit(Types.SET_BREADCRUMB_LIST, breadList);
 			return breadList;

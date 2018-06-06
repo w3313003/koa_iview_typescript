@@ -2,7 +2,7 @@
     <div class="mainbody">
         <div class="page" ref="pages">
 	        <div>
-		        <router-view/>
+		        <router-view />
 	        </div>
         </div>
     </div>
@@ -61,5 +61,6 @@ export default Vue.extend({
 		width calc(100% - 20px)
 		height calc(100% - 20px)
 		overflow: hidden;
+		background #fff
 
 </style>

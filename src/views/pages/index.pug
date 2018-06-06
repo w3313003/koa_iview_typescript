@@ -1,0 +1,19 @@
+extends ../layout.pug
+mixin article(title, block)
+    .article
+        .article-wrapper
+            h1= title
+            if block
+                block
+            else
+                p 没有提供任何内容。
+
+block content
+    table
+        tr
+            each row in ["id", "username", "phone", "count", "type"]
+                th= row
+        each row in data
+            tr
+                each val in row
+                    td= val

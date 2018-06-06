@@ -4,7 +4,7 @@ import menu from "../util/mockmenu";
 export default {
 	async post(ctx: any) {
 		const { password, username } = ctx.request.body;
-		let data = await query.query("SELECT * FROM userInfo WHERE username = ?", [`${username}`]);
+		let data = await query.query("SELECT * FROM userInfo WHERE username = ?", [username]);
 		if((data as any[]).length === 0) {
 			ctx.body = formatRes(-1, null, "用户名不存在");
 			return;
