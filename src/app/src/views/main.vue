@@ -11,7 +11,6 @@ import Vue from 'vue';
 import AsideMenu from "@/components/Menu/index.vue";
 import Headers from "@/components/Header.vue";
 import Main from "@/components/mainBody.vue";
-
 export default Vue.extend({
     components: {
 		AsideMenu,
@@ -19,7 +18,9 @@ export default Vue.extend({
 		Main
 	},
 	created() {
-		// this.$router.push('/main');
+		if(!this.$store.state.currentPage) {
+			this.$router.push('/main');
+		}
 	}
 })
 </script>

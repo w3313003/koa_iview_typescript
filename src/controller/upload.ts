@@ -20,7 +20,7 @@ const upload = multer({
 
 export default {
 	handler: upload.single('files'),
-	post: async (ctx: any) => {
+	post: async (ctx: Koa.Context) => {
 		ctx.body = {
 			filename:123
 		}

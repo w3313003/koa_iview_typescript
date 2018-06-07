@@ -5,6 +5,8 @@ import _sql  from "./util/db_util";
 const cors = require("koa2-cors");
 const _static = require("koa-static");
 const bodyParser = require("koa-bodyparser");
+const koaBody = require('koa-body');
+
 const Path = require("path");
 const app = new Koa();
 
@@ -22,7 +24,13 @@ app.use(views(Path.join(__dirname + "/views"), {
 }));
 
 // 解析post
-app.use(bodyParser());
+// app.use(bodyParser());
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+    }
+}));
 
 // CORS跨域
 app.use(cors({

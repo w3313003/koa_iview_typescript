@@ -13,7 +13,7 @@
 						</i-input>
 					</FormItem>
 					<FormItem prop="password">
-						<i-input v-model="formData.password" placeholder="请输入密码" type="password">
+						<i-input @keydown.native.enter="login" v-model="formData.password" placeholder="请输入密码" type="password">
 							<Icon size="18" slot="prepend" type="locked" />
 						</i-input>
 					</FormItem>
