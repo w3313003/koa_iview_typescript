@@ -11,15 +11,18 @@ import Vue from 'vue';
 import AsideMenu from "@/components/Menu/index.vue";
 import Headers from "@/components/Header.vue";
 import Main from "@/components/mainBody.vue";
+import Store from "../store/index";
 export default Vue.extend({
     components: {
 		AsideMenu,
 		Headers,
 		Main
 	},
-	created() {
-		if(!this.$store.state.currentPage) {
+	mounted() {
+		if(!this.$store.state.currentPage.id) {
 			this.$router.push('/main');
+		} else {
+			this.$router.push(this.$store.state.currentPage.path)
 		}
 	}
 })

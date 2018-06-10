@@ -9,7 +9,7 @@
 	        <div class="middle-con">
 		        <div class="main-breadcrumb">
 					<Breadcrumb>
-						<BreadcrumbItem to="/">
+						<BreadcrumbItem to="/main">
 							首页
 						</BreadcrumbItem>
 						<BreadcrumbItem
@@ -33,8 +33,10 @@
 				             v-for="(item, index) of cachePages"
 				             type="dot"
 				             :closable="item.title !== '首页'"
+							 :name="JSON.stringify(item)"
 				             :color="item.id === currentPage.id ? 'blue' : ''"
 				             @click.native="linkTo(item)"
+							 @on-close="closeTag"
 				        >
 					        {{item.title}}
 				        </Tag>
@@ -47,11 +49,10 @@
 			        <Button size="small" type="primary">
 				        标签选项
 				        <Icon type="arrow-down-b" />
-			
 			        </Button>
 			        <DropdownMenu slot="list">
-				        <DropdownItem>关闭所有</DropdownItem>
-				        <DropdownItem>关闭其他</DropdownItem>
+				        <DropdownItem @click="closeAll">关闭所有</DropdownItem>
+				        <DropdownItem @click="closeOther">关闭其他</DropdownItem>
 			        </DropdownMenu>
 		        </Dropdown>
 	        </div>
@@ -63,6 +64,7 @@
 import Vue from "vue";
 import { mapGetters, mapMutations, mapState } from "vuex";
 import * as Types from "../store/mutations/types";
+import { Inspect } from "../interface/Inspect";
 const IScroll = require("iscroll");
 export default Vue.extend({
 	data() {
@@ -105,7 +107,6 @@ export default Vue.extend({
 	},
 	computed: {
 		...mapGetters({
-			currentPage: "getCurrentPage",
 			menus: "getMenus",
 			sortBread: "sortBread"
 		}),
@@ -142,11 +143,33 @@ export default Vue.extend({
 			this.set_shrink();
 			return false;
 		},
-		linkTo(item) {
+		linkTo(item: Inspect.classPage) {
 			this.$router.push(item.path);
 		},
+		closeTag(event: EventInit, name: string) {
+			const page = JSON.parse(name);
+			const newPageList = this.cachePages.filter((v:Inspect.classPage) => v.id !== page.id);
+			if(this.currentPage.id === page.id) {
+				const index = this.cachePages.findIndex((v: Inspect.classPage) => v.id === page.id);
+				new Promise((resolve) => {
+					this.set_cachePages(newPageList);
+					resolve(newPageList)
+				}).then(newPageList => {
+					(newPageList as any[]).length === 0 ? this.$router.push("/main") : this.$router.push(this.cachePages[index - 1].path);
+				})
+			} else {
+				this.set_cachePages(newPageList);
+			}
+		},
+		closeAll() {
+
+		},
+		closeOther() {
+
+		},
 		...mapMutations({
-			set_shrink: Types.SET_SHRINK
+			set_shrink: Types.SET_SHRINK,
+			set_cachePages: Types.SET_CACHE_PAGES
 		})
 	}
 });

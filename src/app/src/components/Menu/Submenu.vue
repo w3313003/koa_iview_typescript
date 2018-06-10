@@ -1,10 +1,12 @@
 <template>
 	<div>
 		<div v-for="(item, index) of submenu" :key="index">
-			<MenuItem :name="item.path" :key="index" v-if="item.child.length < 1 && item.type !== 'dropdown'">
-				<Icon :type="item.icon"/>
-				{{item.title}}
-			</MenuItem>
+			<div v-if="item.child.length < 1 && item.type !== 'dropdown'">
+				<MenuItem :name="item.path" :key="index">
+					<Icon :type="item.icon"/>
+					{{item.title}}
+				</MenuItem>
+			</div>
 			<Submenu :name="item.id" :key="index" v-else>
 				<template slot="title">
 					<Icon :type="item.icon"/>

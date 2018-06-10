@@ -7,6 +7,7 @@ import getters from './getter';
 import actions from './actions';
 
 Vue.use(Vuex);
+
 const debug = process.env.NODE_ENV !== 'production';
 let option: any = {};
 export default new Vuex.Store({
@@ -14,6 +15,6 @@ export default new Vuex.Store({
 	mutations,
 	getters,
 	actions,
-	plugins: false ? [ createLogger((option as LoggerOption<any>)) ] : []
+	plugins: debug ? [ createLogger((option as LoggerOption<any>)) ] : []
 });
 

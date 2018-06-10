@@ -13,6 +13,7 @@ const BASE_URL = "http://localhost:3000";
 axios.defaults.baseURL = BASE_URL;
 
 axios.interceptors.request.use((config: any) => {
+	config.headers["Authorization"] = "zj";
 	return config;
 }, error => {
 	return Promise.reject(error);

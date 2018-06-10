@@ -10,6 +10,7 @@
         >
             <Button type="ghost" icon="ios-cloud-upload-outline">Upload files</Button>
         </Upload>
+        <img :src="returnPath"/>
     </div>
 </template>
 
@@ -22,14 +23,17 @@ export default Vue.extend({
         return {
             uploadConfig: {
                 action:  api.BASE_URL + "/handler/upload",
-                name: "upfile"
-            }
+                name: "files"
+            },
+            returnPath: ""
         }
     },
     methods: {
-        successHandler(t: any) {
-            console.log(123)
-            console.log(t)
+        successHandler(data: any) {
+            console.log(data);
+            if(data.code === 0) {
+                this.returnPath = `http://localhost:3000${data.data.path}`
+            }
         },
         error(e: any) {
         },

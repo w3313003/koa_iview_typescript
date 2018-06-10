@@ -10,10 +10,13 @@ export default {
 	onRouteChange({commit, state}: any) {
 		commit(Types.SET_CURRENT_PAGE);
 		Promise.resolve(state.currentPage).then((page: Inspect.classPage) => {
+			if(!('id' in page)) {
+				return {};
+			}
 			commit(Types.PUT_TOCACHE, page);
 			return page;
 		}).then(page => {
-			const breadList: Inspect.classPage[] = collectAncestor(state.userInfo.menu, page);
+			const breadList: Inspect.classPage[] = collectAncestor(state.userInfo.menu, (page as any));
 			commit(Types.SET_BREADCRUMB_LIST, breadList);
 			return breadList;
 		}).then(list => {

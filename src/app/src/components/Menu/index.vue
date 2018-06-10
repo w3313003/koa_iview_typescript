@@ -80,7 +80,6 @@ export default Vue.extend({
 			this.initScroll();
 		},
 		handlerSelect(path: string) {
-			// this.putToCache(searchMenuByPath(this.menus, path));
 			this.$router.push(`${path}`)
 		},
     	initScroll() {
@@ -96,8 +95,7 @@ export default Vue.extend({
 			}
     	},
 	    ...mapMutations({
-			setOpenMenus: Types.SET_OPEN_MENUS,
-		    putToCache: Types.PUT_TOCACHE
+			setOpenMenus: Types.SET_OPEN_MENUS
 		})
     }
 
