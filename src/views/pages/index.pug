@@ -7,6 +7,8 @@ mixin article(title, block)
                 block
             else
                 p 没有提供任何内容。
+block script
+    script(src="/index.js")
 
 block content
     table
@@ -17,3 +19,5 @@ block content
             tr
                 each val in row
                     td= val
+    div(class='test' data-index='32') 侧撒大声地
+    button.btn nihao
