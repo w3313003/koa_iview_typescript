@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "ts-import-plugin": "^1.5.2",
+    "ts-loader": "^4.4.1",
     "vant": "^1.1.7",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",

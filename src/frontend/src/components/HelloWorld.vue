@@ -1,17 +1,27 @@
 <template>
 	<div class="hello">
-		<h1>{{ msg }}</h1>
-		<h2>{{name}}</h2>
+		<Button @click="test('sadas')">{{ msg }}</Button>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit, Provide } from 'vue-property-decorator';
+import { Button } from "vant";
 
-@Component
+@Component({
+	components: {
+		Button
+	}
+})
 export default class HelloWorld extends Vue {
     @Prop({ default: 'default value' }) msg: string;
-    @Prop()
+
+	@Provide() foo = 'foo'
+
+	@Emit("B")
+		test(n: string) {
+			this.foo = n;
+		}
 }
 </script>
 

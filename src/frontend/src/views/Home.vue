@@ -1,26 +1,27 @@
 <template>
-  <div class="home">
-	<h2>
-		{{name}}
-	</h2>
-	<Button type="default">默认按钮</Button>
-
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"
-		/>
-  </div>
+	<div>
+		<Button type="primary" size="samll">
+			你好啊
+		</Button>
+		<Hello @B="test" />
+	</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { Component, Vue } from "vue-property-decorator";
+import Hello from "@/components/HelloWorld.vue";
 import { Button } from "vant";
-
 @Component({
-	components: {
-		HelloWorld,
-	}
+  components: {
+    Button,
+	Hello
+  }
 })
 export default class Home extends Vue {
-    name: string = 123;
+  name: number = 123;
+
+  test(c: MouseEvent, d: any) {
+	  console.log(d);
+  }
 }
 </script>
