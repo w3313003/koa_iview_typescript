@@ -1,11 +1,13 @@
 <template>
 	<div class="hello">
 		<Button @click="test('sadas')">{{ msg }}</Button>
+        <h5>{{count}}</h5>
+        <h4>{{formateAge}}</h4>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit, Provide } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit, Provide, Inject } from 'vue-property-decorator';
 import { Button } from "vant";
 
 @Component({
@@ -18,10 +20,16 @@ export default class HelloWorld extends Vue {
 
 	@Provide() foo = 'foo'
 
-	@Emit("B")
-		test(n: string) {
-			this.foo = n;
-		}
+    @Inject() count: number;
+    // data
+    private age: number = 3;
+    
+    get formateAge(): number {
+        return Number(this.age) + 2;
+    }
+	test() {
+        this.$emit("B", {a: 123})
+	}
 }
 </script>
 

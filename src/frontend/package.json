@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "postcss-px-to-viewport": "^0.0.3",
     "ts-import-plugin": "^1.5.2",
     "ts-loader": "^4.4.1",
     "vant": "^1.1.7",
