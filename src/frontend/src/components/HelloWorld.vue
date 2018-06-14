@@ -1,8 +1,5 @@
 <template>
 	<div class="hello">
-		<Button @click="test('sadas')">{{ msg }}</Button>
-        <h5>{{count}}</h5>
-        <h4>{{formateAge}}</h4>
 	</div>
 </template>
 
@@ -16,20 +13,20 @@ import { Button } from "vant";
 	}
 })
 export default class HelloWorld extends Vue {
-    @Prop({ default: 'default value' }) msg: string;
+    // @Prop({ default: 'default value' }) msg: string;
 
-	@Provide() foo = 'foo'
+	// @Provide() foo = 'foo'
 
-    @Inject() count: number;
-    // data
-    private age: number = 3;
+    // @Inject() count: number;
+    // // data
+    // private age: number = 3;
     
-    get formateAge(): number {
-        return Number(this.age) + 2;
-    }
-	test() {
-        this.$emit("B", {a: 123})
-	}
+    // get formateAge(): number {
+    //     return Number(this.age) + 2;
+    // }
+	// test() {
+    //     this.$emit("B", {a: 123})
+	// }
 }
 </script>
 
