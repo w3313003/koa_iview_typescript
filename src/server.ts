@@ -49,7 +49,7 @@ app.use(cors({
     credentials: true,
     allowMethods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
-}));  
+}));
 
 
 // 静态资源托管
@@ -57,7 +57,7 @@ app.use(_static(Path.join(__dirname + "/resource")));
 
 
 app.use(async (ctx: Koa.Context, next) => {
-    console.log('Url:', ctx.request.header);
+    console.log('Url:', ctx.url);
     console.log("method", ctx.method);
     await next();
 });

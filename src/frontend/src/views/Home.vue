@@ -7,7 +7,7 @@
 					<use xlink:href="#icon-tubiaozhizuomoban" />
 				</svg>
 				<img class="logo" src="../assets/pic/logo.webp" alt="">
-				<span class="login">登陆</span>
+				<span class="login" @click="test">登陆</span>
 			</div>
             <div class="search">
                 <Search placeholder="请输入商品名称" />
@@ -19,31 +19,42 @@
                 <span>{{item.text}}</span>
             </div>
         </div>
-        <!-- <div class="swiper">
+        <img class="floor" src="../assets/pic/floor.webp" alt="">
+        <div @click="toMap">
+            <Icon name="location" />
+        </div>
+        <div class="swiper">
             <Swipe>
                 <SwipeItem>
-                    <img src="../assets/pic1.webp" alt="">
+                    <img src="../assets/pic/pic1.webp" alt="">
                 </SwipeItem>
                 <SwipeItem>
-                    <img src="../assets/pic2.webp" alt="">
+                    <img src="../assets/pic/pic2.webp" alt="">
                 </SwipeItem>
             </Swipe>
         </div>
-        <div class="search">
-            <Search placeholder="请输入商品名称" />
-        </div> -->
+        <div class="venue">
+            <img src="../assets/pic/slogan.webp" alt="">
+            <div class="item-wrapper">
+                <div class="item">
+
+                </div>
+            </div>
+        </div>
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
-import { Button, Swipe, SwipeItem, Search  } from "vant";
+import { Button, Swipe, SwipeItem, Search, Icon  } from "vant";
+import axios from "axios";
 @Component({
   components: {
     Button,
     Swipe, 
     SwipeItem,
-    Search
+    Search,
+    Icon
   }
 })
 export default class Home extends Vue {
@@ -71,10 +82,21 @@ export default class Home extends Vue {
       },
   ]
   @Provide() count = 123;
+
+  toMap(): void {
+      console.log(2312312);
+      this.$router.push("/map")
+  }
+  test() {
+      axios.get("http://192.168.1.202:3000/music").then(res => {
+          console.log(res.data)
+      })
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
+  @import "../common/stylus/func.styl"
 .wrap
     background-image url("../assets/pic/bg.webp")
     background-size cover
@@ -149,12 +171,29 @@ export default class Home extends Vue {
                 margin-top 5px
                 display block
                 text-align center
-.swiper
-    width 100%
-    .van-swipe
-        height 100%
-    height 180px
-    img 
+    .floor
         width 100%
+        display block
+        margin-top 20px
+    .swiper
+        box-sizing border-box
+        padding 0 0 5px
+        width 100%
+        .van-swipe
+            height 100%
         height 180px
+        img 
+            padding 0 15px 5px
+            box-sizing border-box
+            width 100%
+            height 180px
+    .venue
+        $bg(#BE3781, #6831E5)
+        box-sizing border-box
+        padding 10px
+        & > img
+            width 100% 
+            display block
+        .item-wrapper
+            display flex
 </style>

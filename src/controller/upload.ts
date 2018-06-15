@@ -7,17 +7,17 @@ const common = require("../util/common");
 export default {
 	post: async (ctx: any) => {
 		try {
-			const file = ctx.request.body.files[0],
-				readerStream = fs.createReadStream(file.path),
-				ext = file.name.split('.').pop();
-			if(!fs.existsSync(common.assetsPath)) {
+			const file = ctx.request.body.files[0];
+			const readerStream = fs.createReadStream(file.path);
+			const ext = file.name.split('.').pop();
+			if (!fs.existsSync(common.assetsPath)) {
 				fs.mkdirSync(common.assetsPath);
-			};
+			}
 			const filename = Math.random().toString().slice(2);
-			const upStream = fs.createWriteStream(`./src/resource/upload/${filename}.${ext}`); 
+			const upStream = fs.createWriteStream(`./src/resource/upload/${filename}.${ext}`);
 			await readerStream.pipe(upStream); 
 			ctx.body = formatRes(0, {upload: "ok", path: `/upload/${filename}.${ext}`} , "上传成功")
-		} catch(e) {
+		} catch (e) {
 			ctx.body = formatRes(-1, e, "error");
 		}
 	}
