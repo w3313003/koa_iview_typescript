@@ -1,6 +1,6 @@
 const router = require("koa-router")();
 import controller from ".././controller/music";
 
-router.get("/", controller.get);
+router.post("/", controller.get);
 
 export default router;

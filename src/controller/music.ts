@@ -1,16 +1,19 @@
 import * as Koa from "Koa";
 import axios from "axios";
+import { formatRes } from "../util/response";
+import common from "../util/common";
+
 const http = require("http");
+const { musicApiProxy } = common;
+
 export default {
-    async get(ctx: Koa.Context) {
-        let body;
-        await axios.get("http://192.168.1.202:4000/playlist/detail?id=24381616").then(res => {
-            ctx.body = {
-                name: 123
-            };
-        });
-        ctx.body = {
-            name: 2
-        };
+    async get(ctx: any) {
+		const { path, params, methods } = ctx.request.body;
+
+		const data = await musicApiProxy(path, params, methods);
+		// await axios.get("http://192.168.1.109:4000/playlist/detail?id=24381616").then(async res => {
+		// 	body = res.data;
+		// });
+		ctx.body = data
     }
 }

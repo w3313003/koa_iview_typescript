@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import About from './views/About.vue';
 import Map from "./views/Map.vue";
+import Music from "./views/music/Index.vue";
+import MusicRecommend from "./views/music/Recommend.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -16,6 +17,16 @@ export default new Router({
 			path: '/map',
 			name: 'map',
 			component: Map
+		},
+		{
+			path: "/music",
+			name: 'music',
+			component: Music,
+			redirect: "/music/recommend",
+			children: [{
+				path: "recommend",
+				component: MusicRecommend
+			}]
 		}
 	],
 });

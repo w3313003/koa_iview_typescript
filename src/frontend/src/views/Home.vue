@@ -6,7 +6,7 @@
                 <svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-tubiaozhizuomoban" />
 				</svg>
-				<img class="logo" src="../assets/pic/logo.webp" alt="">
+				<img class="logo" src="../assets/pic/logo.png" alt="">
 				<span class="login" @click="test">登陆</span>
 			</div>
             <div class="search">
@@ -19,22 +19,22 @@
                 <span>{{item.text}}</span>
             </div>
         </div>
-        <img class="floor" src="../assets/pic/floor.webp" alt="">
+        <img class="floor" src="../assets/pic/floor.png" alt="">
         <div @click="toMap">
             <Icon name="location" />
         </div>
         <div class="swiper">
             <Swipe>
                 <SwipeItem>
-                    <img src="../assets/pic/pic1.webp" alt="">
+                    <img src="../assets/pic/pic1.png" alt="">
                 </SwipeItem>
                 <SwipeItem>
-                    <img src="../assets/pic/pic2.webp" alt="">
+                    <img src="../assets/pic/pic2.png" alt="">
                 </SwipeItem>
             </Swipe>
         </div>
         <div class="venue">
-            <img src="../assets/pic/slogan.webp" alt="">
+            <img src="../assets/pic/slogan.png" alt="">
             <div class="item-wrapper">
                 <div class="item">
 
@@ -47,21 +47,22 @@
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
 import { Button, Swipe, SwipeItem, Search, Icon  } from "vant";
+import api from "../api/index";
 import axios from "axios";
 @Component({
-  components: {
-    Button,
-    Swipe, 
-    SwipeItem,
-    Search,
-    Icon
-  }
+	components: {
+		Button,
+		Swipe, 
+		SwipeItem,
+		Search,
+		Icon
+	}
 })
 export default class Home extends Vue {
   name: number = 123;
   private navItem: object[] = [
       {
-          pic: require("../assets/pic/suning.webp"),
+          pic: require("../assets/pic/suning.png"),
           text: "苏宁易购"
       },
       {
@@ -69,26 +70,27 @@ export default class Home extends Vue {
           text: "天猫超市"
       },
       {
-          pic: require("../assets/pic/travel.webp"),
+          pic: require("../assets/pic/travel.png"),
           text: "天猫国际"
       },
       {
-          pic: require("../assets/pic/ju.webp"),
+          pic: require("../assets/pic/ju.png"),
           text: "聚划算"
       },
       {
-          pic: require("../assets/pic/category.webp"),
-          text: "分类"
+          pic: require("../assets/pic/category.png"),
+          text: "分类",
       },
   ]
   @Provide() count = 123;
 
   toMap(): void {
-      console.log(2312312);
       this.$router.push("/map")
   }
   test() {
-      axios.get("http://192.168.1.202:3000/music").then(res => {
+      api.post("/music", {
+		  path: "/playlist/detail?id=24381616"
+	  }).then(res => {
           console.log(res.data)
       })
   }
@@ -98,7 +100,7 @@ export default class Home extends Vue {
 <style lang="stylus" scoped>
   @import "../common/stylus/func.styl"
 .wrap
-    background-image url("../assets/pic/bg.webp")
+    background-image url("../assets/pic/bg.png")
     background-size cover
     min-height 100vh
     .search-box-cover
@@ -188,7 +190,7 @@ export default class Home extends Vue {
             width 100%
             height 180px
     .venue
-        $bg(#BE3781, #6831E5)
+        $bg_color(#BE3781, #6831E5)
         box-sizing border-box
         padding 10px
         & > img
