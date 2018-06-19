@@ -1,7 +1,9 @@
 <template>
     <div class="singer">
-        <div class="fixed-title" v-show="fixedShow" ref="fixedTitle">
-            {{ fixedTitle }}
+        <div class="list-fixed" v-show="fixedShow" ref="fixedTitle">
+            <div class="fixed-title">
+                {{ fixedTitle }}
+            </div>
         </div>
         <Scroll
             class="listview"
@@ -19,7 +21,7 @@
                     <h2 class="list-group-title">{{group.label}}</h2>
                     <ul>
                         <li class="list-group-item" v-for="(item, i) of group.list" :key="i">
-                            <img :src="item.img1v1Url" alt="" class="avatar">
+                            <img v-lazy="item.img1v1Url" alt="" class="avatar">
                             <span class="name">
                                 {{item.name}}
                             </span>
@@ -58,7 +60,7 @@ export default class extends Vue {
     fixedShow: boolean = true;
     currentIndex: number = 0;
     diff: number = -1;
-
+    fixedTop: number = -1;
     created() {
         this._getSinger().then(res => {
             // console.log(this.$refs.listGroup)
@@ -108,11 +110,11 @@ export default class extends Vue {
     }
     get fixedTitle() {
         if(this.scrollY > -10) {
+            this.fixedShow = false;
             return ''
         };
         return this.formatSingerList[this.currentIndex] ? this.formatSingerList[this.currentIndex].label : ""; 
     }
-
 
     // methods
     _getSinger() {
@@ -142,18 +144,18 @@ export default class extends Vue {
         })
     };
     onScroll(pos: pos) {
-        this.scrollY = pos.y;
+        this.scrollY = pos.y + 5;
     }
     _calculateHeight() {
         const list: any = this.$refs.listGroup;
         let height = 0;
         this.listHeight.push(height);
-        list.forEach((v: HTMLElement) => {
-            height += v.clientHeight;
-            this.listHeight.push(height);
-        });
+        for (let i = 0; i < list.length; i++) {
+            let item = list[i];
+            height += item.clientHeight;
+            this.listHeight.push(height)
+        };
     };
-
     @Watch("singerList", { deep: true })
         onDataChange() {
             setTimeout(() => {
@@ -161,36 +163,45 @@ export default class extends Vue {
             }, 20)
         }
     @Watch("scrollY", {immediate: true})
-        onScrollChange(val: number) {
-            if(val > -10) {
-                this.fixedShow = false;
-            } else {
+        onScrollChange(Y: number) {
+            if(Y <= 0) {
                 this.fixedShow = true;
-                const list = this.listHeight;
-                for(let i = 0; i < list.length - 1; i++) {
-                    let height1 = list[i],
-                        height2 = list[i + 1];
-                    if(height2 && height1 <= -val && height2 > -val) {
-                        console.log(height2);
-                        this.currentIndex = i;
-                        this.diff = height2 + val + 10;
-                        return;
-                    }
+            }
+            const listHeight = this.listHeight;
+            if (Y > 0) {
+                this.currentIndex = 0;
+                return;
+            };
+            for (let i = 0; i < listHeight.length; i++) {
+                let height1 = listHeight[i],
+                    height2 = listHeight[i + 1];
+					console.log(height2)
+                if (!height2 || -Y >= height1 && -Y < height2) {
+                    this.currentIndex = i;
+                    this.diff = height2 + Y;
+                    return;
                 }
             }
+            this.currentIndex = 0;
         }
-    // @Watch("diff")
-    //     onDiffChange(val: number) {
-    //         const titleHeight = (this.$refs.fixedTitle as HTMLElement).clientHeight;
-    //         const fixedTop = (val > 0 && val < titleHeight) ? val - titleHeight : 0;
-    //         (this.$refs.fixedTitle as HTMLElement).style.transform = `translate3d(0,${fixedTop}px ,0)`;
-    //     }
+    @Watch("diff")
+        onDiffChange(newVal: number) {
+            const TITLE_HEIGHT = (this.$refs.fixedTitle as HTMLElement).clientHeight;
+            let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0;
+            if (this.fixedTop === fixedTop) {
+                return
+            }
+            this.fixedTop = fixedTop;
+            (this.$refs.fixedTitle as HTMLElement).style.transform = `translate3d(0,${fixedTop}px,0)`
+        }
 }
 
 
 </script>
 
 <style lang="stylus" scoped>
+@import "../../common/stylus/base"
+
 .singer 
     position fixed
     top 98px
@@ -205,6 +216,7 @@ export default class extends Vue {
         .list-group
             padding-bottom: 3vh;
         .list-group-title
+            margin: 0;
             height: 30px;
             line-height: 30px;
             padding-left: 20px;
@@ -215,8 +227,6 @@ export default class extends Vue {
             display: flex;
             align-items: center;
             padding: 20px 0 0 30px;
-            &:first-child
-                padding-top 10px
             img.avatar
                 width: 50px;
                 height: 50px;
@@ -225,16 +235,17 @@ export default class extends Vue {
                 margin-left: 20px;
                 color: hsla(0,0%,100%,.5);
                 font-size: 14px;
-.fixed-title
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 20px;
-    font-size: 12px;
-    color: hsla(0,0%,100%,.5);
-    background: #333;
-    z-index 33
+.list-fixed
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        z-index 100
+        .fixed-title
+            height: 30px
+            line-height: 30px
+            padding-left: 20px
+            font-size: $font-size-small
+            color: $color-text-l
+            background: $color-highlight-background
 </style>
