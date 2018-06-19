@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Map from "./views/Map.vue";
 import Music from "./views/music/Index.vue";
 import MusicRecommend from "./views/music/Recommend.vue";
+import Singer from "./views/music/Singer.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -26,7 +27,10 @@ export default new Router({
 			children: [{
 				path: "recommend",
 				component: MusicRecommend
-			}]
+			}, {
+                path: "singer",
+                component: Singer
+            }]
 		}
 	],
 });

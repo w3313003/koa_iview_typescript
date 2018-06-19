@@ -1,18 +1,18 @@
-import * as path  from "path";
+import * as path from "path";
 import axios from "axios";
-const BASE_URL = "http://192.168.1.102:4000";
+const BASE_URL = "http://localhost:4000";
 
-export function musicApiProxy(path: string, params?: object, method: string = "get") {
+export function musicApiProxy(url: string, params?: object, method: string = "get") {
 	return new Promise((resolve, reject) => {
 		axios({
-			method: method,
-			url: BASE_URL + path,
+			method,
+			url: BASE_URL + url,
 			params,
 			withCredentials: true
 		}).then(res => {
 			resolve(res.data);
 		}).catch(e => {
-			reject(e)
+			reject(e);
 		})
 	})
 };

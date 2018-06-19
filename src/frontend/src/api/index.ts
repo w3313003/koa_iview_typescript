@@ -6,7 +6,7 @@
 */
 import axios, { AxiosPromise } from "axios";
 import { Toast } from "vant";
-const BASE_URL = "http://192.168.1.102:3000";
+const BASE_URL = "http://localhost:3000";
 
 axios.defaults.baseURL = BASE_URL;
 

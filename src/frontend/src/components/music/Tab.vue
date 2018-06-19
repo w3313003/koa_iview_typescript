@@ -31,6 +31,8 @@ export default class extends Vue {
     height: 44px
     line-height: 44px
     font-size: $font-size-medium
+    z-index 100
+    position relative
     .tab-item
       flex: 1
       text-align: center

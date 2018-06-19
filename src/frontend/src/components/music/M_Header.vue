@@ -26,6 +26,7 @@ export default class extends Vue {
     text-align: center
     color: $color-theme
     font-size: 0
+    z-index 100
     .icons
         display: inline-block
         vertical-align: top

@@ -9,11 +9,9 @@ const { musicApiProxy } = common;
 export default {
     async get(ctx: any) {
 		const { path, params, methods } = ctx.request.body;
-
-		const data = await musicApiProxy(path, params, methods);
 		// await axios.get("http://192.168.1.109:4000/playlist/detail?id=24381616").then(async res => {
 		// 	body = res.data;
 		// });
-		ctx.body = data
+		ctx.body = await musicApiProxy(path, params, methods);
     }
 }
