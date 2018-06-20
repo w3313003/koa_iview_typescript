@@ -19,7 +19,7 @@
             </div>
             <div class='filter' ref='filter'></div>
         </div>
-        <div class="bg-layer"></div>
+        <div class="bg-layer" ref="layer"></div>
         <Scroll :listenScroll="true" 
                 :probeType="3"  
                 class="list" 
@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import Scroll from "../../components/Scroll.vue";
 import music from "../../../../controller/music";
 
@@ -69,11 +69,15 @@ type pos = {
 })
 export default class extends Vue {
     mounted() {
-        this.imageHeight = (this.$refs.bgImage as HTMLElement).clientHeight;
-        this.reservedHeight = (this.$refs.title as HTMLElement).clientHeight;
-        // this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
-        (this.$refs.list as any).$el.style.top = `${(this.$refs.bgImage as HTMLElement).clientHeight}px`
-
+        this.$nextTick(() => {
+            setTimeout(() => {
+                this.imageHeight = (this.$refs.bgImage as HTMLElement).clientHeight;
+                this.reservedHeight = (this.$refs.title as HTMLElement).clientHeight;
+                console.log((this.$refs.title as HTMLElement))
+                this.minTranslateY = -this.imageHeight + this.reservedHeight;
+                (this.$refs.list as any).$el.style.top = `${(this.$refs.bgImage as HTMLElement).clientHeight}px`
+            }, 20)
+        })
     }
     @Prop({default: "标题"})
         title: string;
@@ -83,17 +87,63 @@ export default class extends Vue {
         musicList: music[]
 
     private imageHeight: number = 0;
-    private reservedHeight: number = 0;
+	private reservedHeight: number = 0;
+    private scrollY: number = 0;
+    private minTranslateY: number = 0;
     get bgStyle() {
         return `background-image:url(${this.bgImage})`
     }
 
     scroll(pos: pos) {
-        console.log(pos)
+        this.scrollY = pos.y;
     }
     back() {
         this.$router.back();
     }
+    @Watch("scrollY")
+        onScrollYChange(newY: number) {
+            const layer = <HTMLElement>this.$refs.layer;
+            const listEl = <HTMLElement>(this.$refs.list as Vue).$el;
+            const filter = <HTMLElement>this.$refs.filter;
+            const bgImage = <HTMLElement>this.$refs.bgImage;
+            const btn = <HTMLElement>this.$refs.playBtn;
+            // 滚动到一定程度取定值 
+            let transLateY = Math.max(this.minTranslateY, newY);
+
+            let zIndex = 0;
+            let scale = 1;
+            let blur = 0;
+            const percent = Math.abs(newY / this.imageHeight);
+            if (newY > 0) {
+                scale = 1 + percent;
+                zIndex = 10;
+            } else {
+                blur = Math.min(20 * percent, 20)
+            }
+            (filter.style as any)['backdrop-filter'] = `blur(${blur}px)`;
+            layer.style.transform = `translate3d(0,${transLateY}px,0)`;
+            if (newY < this.minTranslateY) {
+                zIndex = 10;
+                bgImage.style.paddingTop = '0';
+                bgImage.style.height = `${this.reservedHeight}px`;
+                btn.style.display = "none";
+                console.log(2);
+            } else {
+                console.log(1);
+                bgImage.style.paddingTop = '70%';
+                bgImage.style.height = `0`;
+                btn.style.display = "block";
+            }
+            bgImage.style.zIndex = "" + zIndex;
+            bgImage.style.transform = `scale(${scale})`;
+            // if(newY < 0) {
+            //     layer.style.transform = `translate3d(0,${newY}px,0)`
+            // } else {
+            //     // layer.style.transform = `translate(0, 0)`
+            //     layer.style.transform = `translate3d(0,${newY}px,0)`
+            //     listEl.style.transform = `translate3d(0,${newY}px,0)`
+            // }
+        }
 }
 
 
@@ -130,7 +180,8 @@ export default class extends Vue {
       no-wrap()
       text-align: center
       line-height: 40px
-      font-size: $font-size-large
+      height 40px
+      font-size: $font-size-medium
       color: $color-text
     .bg-image
       position: relative
@@ -223,7 +274,6 @@ export default class extends Vue {
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
-          color: #fff;
           font-size 15px
           no-wrap()
           color: $color-text
