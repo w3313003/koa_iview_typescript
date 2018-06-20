@@ -1,5 +1,11 @@
 const tsImportPluginFactory = require("ts-import-plugin");
-
+const path = require("path");
+const assetsPath = function (_path) {
+    var assetsSubDirectory = process.env.NODE_ENV === 'production' ?
+        config.build.assetsSubDirectory :
+        config.dev.assetsSubDirectory
+    return path.posix.join(assetsSubDirectory, _path)
+}
 module.exports = {
     devServer: {
         host: "0.0.0.0",
@@ -27,9 +33,7 @@ module.exports = {
                 }
             });
     },
-    configureWebpack: () => {
-        external: {
-            "BMap"
-        }
+    configureWebpack: config => {
+       
     }
 };

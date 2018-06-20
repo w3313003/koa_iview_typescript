@@ -15,10 +15,10 @@ export default {
 			}
 			const filename = Math.random().toString().slice(2);
 			const upStream = fs.createWriteStream(`./src/resource/upload/${filename}.${ext}`);
-			await readerStream.pipe(upStream); 
-			ctx.body = formatRes(0, {upload: "ok", path: `/upload/${filename}.${ext}`} , "上传成功")
+			await readerStream.pipe(upStream);
+			ctx.body = formatRes(0, {upload: "ok", path: `/upload/${filename}.${ext}`} , "上传成功");
 		} catch (e) {
 			ctx.body = formatRes(-1, e, "error");
 		}
 	}
-}
+};

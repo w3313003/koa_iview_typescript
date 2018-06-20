@@ -11,6 +11,7 @@
             :listenScroll="true"
             @scroll="onScroll"
             :probeType="3"
+            ref="scroll"
         >
             <ul>
                 <li v-for="(group, index) in formatSingerList" 
@@ -20,7 +21,7 @@
                 >
                     <h2 class="list-group-title">{{group.label}}</h2>
                     <ul>
-                        <li class="list-group-item" v-for="(item, i) of group.list" :key="i">
+                        <li @click="select(item)" class="list-group-item" v-for="(item, i) of group.list" :key="i">
                             <img v-lazy="item.img1v1Url" alt="" class="avatar">
                             <span class="name">
                                 {{item.name}}
@@ -30,6 +31,13 @@
                 </li>
             </ul>
         </Scroll>
+        <SideBar 
+            :data="shortcutList"
+            :currentIndex="currentIndex"
+            @tStart="touchStartHandler"
+            @tMove="touchMoveHandler"
+        />
+        <router-view />
     </div>
 </template>
 
@@ -39,6 +47,7 @@ import { Vue, Component, Watch } from "vue-property-decorator";
 import api from "../../api/index";
 import { getPinyinBySinger } from "../../common/util";
 import Scroll from "../../components/Scroll.vue";
+import SideBar from "@/components/music/SideBar.vue";
 import { setTimeout } from "timers";
 
 const HOT_SINGER_LEN = 10;
@@ -49,23 +58,33 @@ type pos = {
 }
 @Component({
     components: {
-        Scroll
+        Scroll,
+        SideBar
     }
 })
 export default class extends Vue {
     // initData
-    singerList: object[] = [];
-    listHeight: Array<number> = [];
-    scrollY: number = 0;
-    fixedShow: boolean = true;
-    currentIndex: number = 0;
-    diff: number = -1;
-    fixedTop: number = -1;
+    private singerList: object[] = [];
+
+    private listHeight: Array<number> = [];
+
+    private scrollY: number = 0;
+
+    private fixedShow: boolean = true;
+
+    private currentIndex: number = 0;
+
+    private diff: number = -1;
+
+    private fixedTop: number = -1;
+
+
     created() {
         this._getSinger().then(res => {
             // console.log(this.$refs.listGroup)
         });
     }
+
     // computed
     get formatSingerList() {
         const map: any = {
@@ -115,7 +134,9 @@ export default class extends Vue {
         };
         return this.formatSingerList[this.currentIndex] ? this.formatSingerList[this.currentIndex].label : ""; 
     }
-
+    get shortcutList() {
+        return this.formatSingerList.map(v => v.label[0]);
+    }
     // methods
     _getSinger() {
         return api.post("/music", {
@@ -143,8 +164,17 @@ export default class extends Vue {
             }
         })
     };
+    select(item: any) {
+        this.$router.push(`/music/singer/${item.id}`);
+    }
     onScroll(pos: pos) {
         this.scrollY = pos.y + 5;
+    }
+    touchStartHandler(index: number) {
+        (this.$refs.scroll as any).scrollToElement((this.$refs.listGroup as HTMLElement[])[index], 500);
+    }
+    touchMoveHandler(index: number) {
+        (this.$refs.scroll as any).scrollToElement((this.$refs.listGroup as HTMLElement[])[index], 500);
     }
     _calculateHeight() {
         const list: any = this.$refs.listGroup;
@@ -156,6 +186,7 @@ export default class extends Vue {
             this.listHeight.push(height)
         };
     };
+
     @Watch("singerList", { deep: true })
         onDataChange() {
             setTimeout(() => {
@@ -175,8 +206,7 @@ export default class extends Vue {
             for (let i = 0; i < listHeight.length; i++) {
                 let height1 = listHeight[i],
                     height2 = listHeight[i + 1];
-					console.log(height2)
-                if (!height2 || -Y >= height1 && -Y < height2) {
+                if (!height2 || -Y + 10 >= height1 && -Y + 10 <= height2) {
                     this.currentIndex = i;
                     this.diff = height2 + Y;
                     return;
@@ -207,12 +237,12 @@ export default class extends Vue {
     top 98px
     width 100%
     bottom 0
+    z-index 101
     overflow hidden
     .listview
         position: relative;
         width: 100%;
         height: 100%;
-        overflow: hidden;
         .list-group
             padding-bottom: 3vh;
         .list-group-title
